@@ -12,3 +12,7 @@ app.use('/api/empresas', empresaRoutes);
 app.listen(4000, () => {
   console.log("Servidor corriendo en http://localhost:4000");
 });
+// Agregar rutas de autenticación
+const authRoutes = require('./src/routes/authRoutes');
+
+app.use('/api/auth', authRoutes);
