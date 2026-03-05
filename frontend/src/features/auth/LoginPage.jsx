@@ -1,24 +1,28 @@
-import React, { useState, useContext } from 'react';
-import api from '../../services/apiClient';
-import { AuthContext } from '../../context/AuthContext';
-import './login.css';
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom"; // 🔹 importante
+import api from "../../services/apiClient";
+import { AuthContext } from "../../context/AuthContext";
+import "./login.css";
 
 export default function LoginPage() {
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate(); // 🔹 hook de navegación
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
-  e.preventDefault(); // evita que recargue la página
+    e.preventDefault(); // evita recargar la página
 
-  try {
-    const res = await api.post('/auth/login', { email, password });
-    login(res.data);
-  } catch (err) {
-    alert("Credenciales incorrectas");
-  }
-};
+    try {
+      const res = await api.post("/auth/login", { email, password });
+      login(res.data);       // guarda el user en contexto
+      navigate("/asesor");   // 🔹 redirige al dashboard
+    } catch (err) {
+      console.error(err);    // ayuda a depurar
+      alert("Credenciales incorrectas");
+    }
+  };
 
   return (
     <div className="login-container">
@@ -29,13 +33,17 @@ export default function LoginPage() {
         <input
           type="email"
           placeholder="Correo electrónico"
-          onChange={e => setEmail(e.target.value)}
+          value={email}                  // 🔹 bind del estado
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
           type="password"
           placeholder="Contraseña"
-          onChange={e => setPassword(e.target.value)}
+          value={password}               // 🔹 bind del estado
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <button type="submit">Ingresar</button>
