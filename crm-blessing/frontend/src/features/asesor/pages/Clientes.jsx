@@ -264,23 +264,23 @@ export default function Clientes() {
                       borderRadius: 12, padding: "2px 10px", fontSize: 11, fontWeight: 700,
                     }}>{c.oportunidades}</span>
                   </td>
-                  <td style={{ padding: "10px 14px" }}>
-                    <span style={{
-                      display: "inline-block", // Necesario para que respete el width
-                      width: "130px",          // <--- TAMAÑO IGUAL
-                      textAlign: "center",     // Centra el texto dentro del badge
-                      background: ec.bg, 
-                      color: ec.text,
-                      border: `1px solid ${ec.border}`,
-                      borderRadius: 3, 
-                      padding: "3px 0", 
-                      fontSize: 11, 
-                      fontWeight: 700, 
-                      whiteSpace: "nowrap",
-                    }}>
-                      {c.estado}
-                    </span>
-                  </td>
+            <td style={{ padding: "10px 14px" }}>
+              <span style={{
+            display: "inline-block", // Necesario para que respete el width
+            width: "130px",          // <--- TAMAÑO IGUAL
+                textAlign: "center",     // Centra el texto dentro del badge
+                background: ec.bg, 
+                color: ec.text,
+                border: `1px solid ${ec.border}`,
+                borderRadius: 3, 
+                padding: "3px 0", 
+                fontSize: 11, 
+                fontWeight: 700, 
+                whiteSpace: "nowrap",
+            }}>
+                {c.estado}
+              </span>
+            </td>
                 </tr>
               );
             })}
