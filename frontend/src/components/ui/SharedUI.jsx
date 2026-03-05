@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faIdCard, faPhone, faEnvelope, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { C, S, FONT } from "../../styles/tokens";
 
 // ── PageHeader ─────────────────────────────────────────────────
@@ -93,6 +95,13 @@ export function ContactoCarrusel({ contactos }) {
 
   const c = contactos[idx];
 
+  const campos = [
+    { icon: faUser,     valor: c.nombre },
+    { icon: faIdCard,   valor: c.dni    },
+    { icon: faPhone,    valor: c.tel    },
+    { icon: faEnvelope, valor: c.email  },
+  ];
+
   return (
     <div style={{ position: "relative", minHeight: 80 }}>
       <div style={{
@@ -100,27 +109,47 @@ export function ContactoCarrusel({ contactos }) {
         transform: animating ? `translateX(${dir * 12}px)` : "translateX(0)",
         transition: "all 0.2s ease",
       }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5px 10px", marginBottom: 8 }}>
-          {[["👤", c.nombre], ["🪪", c.dni], ["📞", c.tel], ["✉️", c.email]].map(([icon, val], i) => (
+        {/* Grid 2 columnas de campos */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "6px 12px",
+          marginBottom: 8,
+        }}>
+          {campos.map(({ icon, valor }, i) => (
             <div key={i} style={{
-              display: "flex", gap: 5, alignItems: "center",
-              fontSize: 12, color: C.gray700, overflow: "hidden",
+              display: "flex", gap: 7, alignItems: "center",
+              overflow: "hidden",
             }}>
-              <span style={{ fontSize: 11 }}>{icon}</span>
+              <FontAwesomeIcon
+                icon={icon}
+                style={{ fontSize: 12, color: C.red, minWidth: 14, flexShrink: 0 }}
+              />
               <span style={{
-                overflow: "hidden", textOverflow: "ellipsis",
-                whiteSpace: "nowrap", fontFamily: FONT,
-              }}>{val}</span>
+                fontFamily: FONT, fontSize: 12, color: C.gray700,
+                overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+              }}>{valor}</span>
             </div>
           ))}
         </div>
-        <div style={{ fontSize: 11, color: C.gray500, fontFamily: FONT, marginBottom: 6 }}>
-          <span style={{ fontWeight: 700 }}>Cargo:</span> {c.cargo}
+
+        {/* Cargo en fila completa */}
+        <div style={{ display: "flex", gap: 7, alignItems: "center" }}>
+          <FontAwesomeIcon
+            icon={faBriefcase}
+            style={{ fontSize: 12, color: C.red, minWidth: 14, flexShrink: 0 }}
+          />
+          <span style={{
+            fontFamily: FONT, fontSize: 12, color: C.gray500,
+          }}>
+            <span style={{ fontWeight: 700, color: C.gray700 }}>Cargo: </span>{c.cargo}
+          </span>
         </div>
       </div>
 
+      {/* Navegación dots */}
       {contactos.length > 1 && (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 4 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 10 }}>
           <NavDot onClick={() => navigate(-1)}>‹</NavDot>
           {contactos.map((_, i) => (
             <div
