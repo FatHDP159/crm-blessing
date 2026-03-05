@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUsers, faBullseye, faTrophy, faMoneyBillWave,
+  faMobileAlt, faWifi, faPhoneAlt, faCloud,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Cell, Legend,
@@ -29,14 +34,14 @@ const CITAS_DATA = [
 ];
 
 const METRICAS = [
-  { label: "Clientes",         value: "47",         icon: "👥" },
-  { label: "Oportunidades",    value: "93",          icon: "🎯" },
-  { label: "Ganadas",          value: "36",          icon: "✅" },
-  { label: "CF Total Ganadas", value: "S/ 284,000",  icon: "💰" },
-  { label: "CF Móvil",         value: "S/ 98,000",   icon: "📱" },
-  { label: "CF Fibra",         value: "S/ 67,000",   icon: "🌐" },
-  { label: "CF Fija",          value: "S/ 54,000",   icon: "📞" },
-  { label: "CF Cloud",         value: "S/ 65,000",   icon: "☁️" },
+  { label: "Clientes",         value: "47",         icon: faUsers        },
+  { label: "Oportunidades",    value: "93",          icon: faBullseye     },
+  { label: "Ganadas",          value: "36",          icon: faTrophy       },
+  { label: "CF Total Ganadas", value: "S/ 284,000",  icon: faMoneyBillWave},
+  { label: "CF Móvil",         value: "S/ 98,000",   icon: faMobileAlt   },
+  { label: "CF Fibra",         value: "S/ 67,000",   icon: faWifi        },
+  { label: "CF Fija",          value: "S/ 54,000",   icon: faPhoneAlt    },
+  { label: "CF Cloud",         value: "S/ 65,000",   icon: faCloud       },
 ];
 
 const GRAF_OPTIONS = [
@@ -102,8 +107,8 @@ export default function Principal() {
       }}>
         {METRICAS.map((m, i) => (
           <div key={i} style={{ ...S.card, padding: 16, position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", right: 12, top: 12, fontSize: 20, opacity: 0.15 }}>
-              {m.icon}
+            <div style={{ position: "absolute", right: 12, top: 12, opacity: 0.12 }}>
+              <FontAwesomeIcon icon={m.icon} style={{ fontSize: 28, color: C.black }} />
             </div>
             <div style={S.text(11, 700, C.gray500)}>{m.label.toUpperCase()}</div>
             <div style={{ ...S.text(22, 800, C.black), marginTop: 4 }}>{m.value}</div>
